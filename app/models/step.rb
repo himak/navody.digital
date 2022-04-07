@@ -3,9 +3,6 @@ class Step < ApplicationRecord
 
   include Searchable
 
-  extend FriendlyId
-  friendly_id :title, use: :slugged
-
   belongs_to :journey
   has_many :tasks, dependent: :destroy
   has_many :user_steps, dependent: :destroy
@@ -72,10 +69,6 @@ class Step < ApplicationRecord
       task.position = index + 1
       task.save
     end
-  end
-
-  def should_generate_new_friendly_id?
-    slug.blank? && !title.blank?
   end
 
   private
